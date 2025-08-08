@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Your Name — Creative Portfolio</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700;900&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================
+       Base / Reset
+       ========================== */
+    :root{
+      --bg:#0f1020;
+      --panel:#11121f;
+      --accent:#ff4d6d; /* bold eye-catching color */
+      --accent-2:#7b61ff;
+      --muted:#9aa0b4;
+      --glass: rgba(255,255,255,0.04);
+      --radius:16px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;}
+    body{
+      margin:0;
+      font-family: 'Raleway',system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      background:linear-gradient(180deg,var(--bg),#07070b 60%);
+      color:#e6e9ef;
+      line-height:1.45;
+    }
+
+    /* ==========================
+       Layout & Nav
+       ========================== */
+    header{
+      position:fixed;
+      top:16px;left:16px;
+      right:16px;
+      z-index:60;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      padding:10px 14px;
+      border-radius:14px;backdrop-filter: blur(6px);
+      box-shadow: 0 6px 18px rgba(2,6,23,0.6);
+    }
+    .brand{display:flex;
+    align-items:center;
+    gap:12px}
+    .logo{
+      width:44px;
+      height:44px;
+      border-radius:10px;
+      flex:0 0 44px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      display:grid;
+      place-items:center;
+      font-weight:900;
+      font-family:'Playfair Display',serif;
+      color:white
+    }
+    nav{
+    display:flex;
+    gap:18px;
+    align-items:center}
+    nav a{color:var(--muted);text-decoration:none;font-weight:600;padding:8px 10px;border-radius:10px}
+    nav a:hover{color:white;background:var(--glass)}
+    .nav-toggle{display:none}
+
+    /* ==========================
+       Hero
+       ========================== */
+    .hero{
+        min-height:100vh;
+        display:grid;
+        align-items:center;
+        padding:120px 6vw 80px;
+        grid-template-columns:1fr 460px;
+        gap:48px}
+    .hero .content{
+        max-width:720px
+    }
+    .eyebrow{
+        color:var(--accent);
+        font-weight:700;
+        letter-spacing:1px;
+        text-transform:uppercase
+    }
+    h1{font-family:'Playfair Display',serif;
+    font-size:clamp(36px,6vw,64px);
+    margin:8px 0 16px
+}
+    p.lead{color:var(--muted);
+    font-size:1.05rem
+}
+
+   
+    /* ==========================
+       Sections
+       ========================== */
+    main{
+        padding:40px 6vw 120px
+    }
+    section{
+        padding:72px 0;
+        border-bottom:1px solid rgba(255,255,255,0.02)
+    }
+    section h2{
+        font-family:'Playfair Display',serif;
+        margin:0 0 14px
+    }
+    .grid{
+        display:grid;
+        gap:18px}
+
+    /* Projects grid */
+   /* Project card redesign */
+.project {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  min-height: 200px;
+  background: #0b0b14;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  
+}
+
+.project img {
+  width: 100%;
+  height: 100%;
+  object-fit:fill;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.project:hover img {
+  transform: scale(1.06);
+}
+
+/* Overlay with title and buttons */
+.project .overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(0,0,0,0.8) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 14px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.project:hover .overlay {
+  opacity: 1;
+}
+
+.project-title {
+  color: white;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.github-btn {
+  background: var(--glass);
+  padding: 8px 12px;
+  border-radius: 8px;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.3s ease;
+}
+
+.github-btn:hover {
+  background: var(--accent);
+}
+.github-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+    /* Skills */
+    .skills{
+        display:flex;
+        gap:12px;
+        flex-wrap:wrap
+    }
+    .skill{
+        background:var(--glass);
+        padding:10px 14px;
+        border-radius:12px;
+        color:var(--muted);
+        font-weight:700
+    }
+
+    /* Contact */
+    form{
+        display:grid;
+        align-items: center;
+        gap:12px;
+        max-width:720px
+    }
+    input,textarea{
+        background:transparent;
+        border:1px solid rgba(255,255,255,0.06);
+        padding:14px;
+        border-radius:10px;
+        color:inherit
+    }
+    button[type=submit]{
+        background:linear-gradient(90deg,var(--accent),var(--accent-2));
+        border:none;
+        padding:12px 16px;
+        border-radius:12px;
+        color:white;
+        font-weight:700;
+        cursor:pointer
+    }
+
+    /* Lightbox */
+    .lightbox{
+        position:fixed;
+        inset:0;
+        display:none;
+        align-items:center;
+        justify-content:center;
+        background:rgba(3,3,6,0.85);
+        z-index:999;
+        padding:24px
+    }
+    .lightbox.open{
+        display:flex
+    }
+    .lightbox img{
+        max-width:92%;
+        max-height:86%;
+        border-radius:10px;
+        box-shadow:0 40px 120px rgba(2,4,12,0.9)
+    }
+    .lightbox .close{
+        position:absolute;
+        top:22px;
+        right:22px;
+        background:transparent;
+        border:2px solid rgba(255,255,255,0.06);
+        padding:8px;border-radius:10px;
+        color:white;
+        font-weight:700}
+
+    /* small screens */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr; padding-top:140px}
+      .projects .grid{grid-template-columns:repeat(2,1fr)}
+      nav{display:none}
+      .nav-toggle{display:block}
+    }
+    @media (max-width:560px){
+      .projects .grid{grid-template-columns:1fr}
+      header{padding:8px}
+      .logo{width:40px;height:40px}
+      .hero{padding:110px 5vw 60px}
+    }
+
+    /* Scroll-visible utility (used by JS) */
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,var(--transform) .7s ease}
+    .reveal.visible{opacity:1;transform:none}
+    /* view work and download resume */
+
+     .btn-primary {
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: none;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-position 0.4s ease;
+    background-size: 200%;
+    background-position: left;
+  }
+  .btn-primary:hover {
+    background-position: right;
+  }
+
+  </style>
+
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo">Build</div>
+      <div>
+        <div style="font-weight:700">Om Raiwade</div>
+        <div style="font-size:12px;color:var(--muted)">Frontend Developer</div>
+      </div>
+    </div>
+
+    <nav aria-label="Primary navigation">
+      <a href="#hero">Home</a>
+      <a href="#about">About</a>
+      <a href="#projects">Work</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <button class="nav-toggle" aria-expanded="false" aria-controls="mobile-menu">☰</button>
+  </header>
+
+  <main>
+    <section id="hero" class="hero">
+      <div class="content">
+        <div class="eyebrow reveal">Design X Coder</div>
+        <h1 class="reveal">Hi — I'm <span style="background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent;">Om Raiwade</span><br><small style="font-size:16px;color:var(--muted);font-weight:600">I craft bold, experimental interfaces & delightful interactions.</small></h1>
+        <p class="lead reveal">I design and build playful, accessible web experiences using HTML, CSS, and JavaScript. My focus: striking visuals, smooth motion, and usable interfaces that tell a story.</p>
+        <p style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;" class="reveal">
+  <a href="#projects" style="text-decoration:none">
+   <p style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;" class="reveal">
+  <!-- View Work -->
+  <a href="#projects" style="text-decoration:none">
+    <button class="btn-primary">
+      View Work
+    </button>
+  </a>
+
+  <!-- Download Resume -->
+  <a href="./assets/Om Resume.docx" download style="text-decoration:none">
+    <button class="btn-primary">
+      📄 Download Resume
+    </button>
+  </a>
+</p>
+  </a>
+</p>
+
+      </div>
+
+   
+   <aside class="preview-card reveal" style="text-align:center;">
+  <img 
+    src="./assets/Profile pic.png" 
+    alt="Om Raiwade Portrait" 
+    style="
+      width:220px;
+      height:220px;
+      object-fit:cover;
+      border-radius:50%;
+      box-shadow:0 8px 25px rgba(0,0,0,0.4);
+      border:4px solid rgba(255,255,255,0.1);
+      animation: floatImage 4s ease-in-out infinite;
+      transition: transform 0.3s ease;
+    "
+  >
+  <div style="padding-top:16px;color:var(--muted);font-weight:600;font-size:15px;">
+    
+  </div>
+</aside>
+
+<style>
+@keyframes floatImage {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+</style>
+
+    
+  </div>
+</aside>
+
+    </section>
+
+    <section id="about">
+      <h2 class="reveal">About Me</h2>
+      <div class="grid" style="grid-template-columns:1fr 320px;align-items:start;gap:28px">
+        <div class="reveal">
+          <p>I’m a designer-developer who loves bringing ideas to life with motion, color, and carefully-crafted details. I work mainly on experimental UI, interactive posters, and responsive sites — always keeping accessibility and performance in mind.</p>
+          <p>I prefer a toolkit of plain HTML/CSS/JS — no build steps required — so my work is easy to fork and adapt.</p>
+        </div>
+        <div class="reveal" style="background:var(--panel);padding:18px;border-radius:12px">
+          <strong>Quick facts</strong>
+          <ul style="margin:10px 0 0;color:var(--muted)">
+            <li>Location: Pune</li>
+            <li> Key Strengths: Problem-solving, clean code</li>
+            <li>Availability: Immediate joining</li></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  <section id="projects" class="projects">
+      <h2 class="reveal">Creative Work</h2>
+    <div class="grid reveal" style="grid-template-columns:repeat(3,1fr);margin-top:18px">
+  <!-- Project A -->
+  <div class="project" data-title="Project A" data-src="" tabindex="0">
+    <img src="./assets/pic 1.png" alt="Project A">
+    <div class="overlay">
+      <div class="project-title">Project A</div>
+      <a href="./assets/project/index.html/index.html" target="_blank" class="github-btn">
+        <!-- GitHub Icon -->
+        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 .5C5.6.5.5 5.6.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2.2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.2-1.2-1.5-1.2-1.5-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 .1 1.6-.8 1.9-1.3.1-.7.4-1.1.7-1.4-2.5-.3-5.2-1.3-5.2-5.8 0-1.3.5-2.4 1.1-3.3 0-.3-.4-1.4.1-3 0 0 .9-.3 3.4 1.2a11.7 11.7 0 0 1 6.1 0c2.5-1.5 3.4-1.2 3.4-1.2.5 1.6.1 2.7.1 3 .7.9 1.1 2 1.1 3.3 0 4.5-2.7 5.5-5.2 5.8.4.4.8 1.1.8 2.2v3.2c0 .3.2.7.8.6A10.9 10.9 0 0 0 23.5 12c0-6.4-5.1-11.5-11.5-11.5Z"/></svg>
+        View on GitHub
+      </a>
+    </div>
+  </div>
+
+  <!-- Project B -->
+  <div class="project" data-title="Project B" data-src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1600" tabindex="0">
+    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=800" alt="Project B">
+    <div class="overlay">
+      <div class="project-title">Project B</div>
+      <a href="https://github.com/yourusername/project-b" target="_blank" class="github-btn">
+        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 .5C5.6.5.5 5.6.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2.2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.2-1.2-1.5-1.2-1.5-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 .1 1.6-.8 1.9-1.3.1-.7.4-1.1.7-1.4-2.5-.3-5.2-1.3-5.2-5.8 0-1.3.5-2.4 1.1-3.3 0-.3-.4-1.4.1-3 0 0 .9-.3 3.4 1.2a11.7 11.7 0 0 1 6.1 0c2.5-1.5 3.4-1.2 3.4-1.2.5 1.6.1 2.7.1 3 .7.9 1.1 2 1.1 3.3 0 4.5-2.7 5.5-5.2 5.8.4.4.8 1.1.8 2.2v3.2c0 .3.2.7.8.6A10.9 10.9 0 0 0 23.5 12c0-6.4-5.1-11.5-11.5-11.5Z"/></svg>
+        View on GitHub
+      </a>
+    </div>
+  </div>
+
+  <!-- Project C -->
+  <div class="project" data-title="Project C" data-src="https://images.unsplash.com/photo-1506765515384-028b60a970df?q=80&w=1600" tabindex="0">
+    <img src="https://images.unsplash.com/photo-1506765515384-028b60a970df?q=80&w=800" alt="Project C">
+    <div class="overlay">
+      <div class="project-title">Project C</div>
+      <a href="https://github.com/yourusername/project-c" target="_blank" class="github-btn">
+        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 .5C5.6.5.5 5.6.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2.2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.2-1.2-1.5-1.2-1.5-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 .1 1.6-.8 1.9-1.3.1-.7.4-1.1.7-1.4-2.5-.3-5.2-1.3-5.2-5.8 0-1.3.5-2.4 1.1-3.3 0-.3-.4-1.4.1-3 0 0 .9-.3 3.4 1.2a11.7 11.7 0 0 1 6.1 0c2.5-1.5 3.4-1.2 3.4-1.2.5 1.6.1 2.7.1 3 .7.9 1.1 2 1.1 3.3 0 4.5-2.7 5.5-5.2 5.8.4.4.8 1.1.8 2.2v3.2c0 .3.2.7.8.6A10.9 10.9 0 0 0 23.5 12c0-6.4-5.1-11.5-11.5-11.5Z"/></svg>
+        View on GitHub
+      </a>
+    </div>
+  </div>
+</div>
+
+    </section>
+
+    <section id="skills">
+      <h2 class="reveal">Skills</h2>
+      <div class="skills reveal" style="margin-top:12px">
+        <div class="skill">HTML</div>
+        <div class="skill">CSS Grid & Flexbox</div>
+        <div class="skill">JavaScript</div>
+        <div class="skill">React</div>
+        <div class="skill">Sql</div>
+        <div class="skill">Postgre Sql</div>
+        <div class="skill">Node.Js</div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2 class="reveal">Contact</h2>
+      <p class="reveal" style="color:var(--muted)">Want to work together? Send a quick message.</p>
+
+      <form class="reveal" onsubmit="handleContact(event)">
+        <input name="name" placeholder="Your name" required>
+        <input name="email" type="email" placeholder="you@example.com" required>
+        <textarea name="message" rows="6" placeholder="Tell me about your project" required></textarea>
+        <div style="display:flex;gap:10px;align-items:center">
+          <button type="submit">Send message</button>
+          <div style="color:var(--muted);font-size:13px"></div>
+        </div>
+      </form>
+    </section>
+
+  </main>
+
+  <!-- Lightbox markup -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-hidden="true">
+    <button class="close" aria-label="Close (Esc)">✕</button>
+    <img src="" alt="Lightbox preview" />
+  </div>
+
+  <script>
+    // ==========================
+    // Mobile nav toggle
+    // ==========================
+    const toggle = document.querySelector('.nav-toggle');
+    toggle.addEventListener('click', ()=>{
+      const open = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!open));
+      // create a simple mobile menu
+      if(!open){
+        const menu = document.createElement('div');
+        menu.id = 'mobile-menu';
+        menu.style.position='fixed';menu.style.right='16px';menu.style.top='74px';menu.style.background='rgba(0,0,0,0.6)';menu.style.padding='14px';menu.style.borderRadius='12px';menu.style.backdropFilter='blur(6px)';
+        menu.innerHTML = `
+          <a href="#about" style="display:block;padding:8px;color:var(--muted)">About</a>
+          <a href="#projects" style="display:block;padding:8px;color:var(--muted)">Work</a>
+          <a href="#skills" style="display:block;padding:8px;color:var(--muted)">Skills</a>
+          <a href="#contact" style="display:block;padding:8px;color:var(--muted)">Contact</a>
+        `;
+        document.body.appendChild(menu);
+        toggle._menu = menu;
+      } else {
+        if(toggle._menu) toggle._menu.remove();
+      }
+    });
+
+    // ==========================
+    // Lightbox (vanilla)
+    // Inspired by simple modal/lightbox patterns
+    // ==========================
+    const lightbox = document.getElementById('lightbox');
+    const lbImage = lightbox.querySelector('img');
+    const lbClose = lightbox.querySelector('.close');
+
+    function openLightbox(src, alt){
+      lbImage.src = src; lbImage.alt = alt || '';
+      lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox(){
+      lightbox.classList.remove('open');
+      lightbox.setAttribute('aria-hidden','true');
+      document.body.style.overflow = '';
+      lbImage.src='';
+    }
+    lbClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e)=>{ if(e.target===lightbox) closeLightbox(); });
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeLightbox(); });
+
+    // Attach to project items
+    document.querySelectorAll('.project').forEach(item=>{
+      item.addEventListener('click', ()=>{
+        const src = item.dataset.src || item.querySelector('img').src;
+        const title = item.dataset.title || item.querySelector('img').alt || '';
+        openLightbox(src,title);
+      });
+      // make keyboard accessible
+      item.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') { e.preventDefault(); item.click(); } });
+    });
+
+    // ==========================
+    // Scroll-triggered reveals using IntersectionObserver
+    // Lightweight and performant (no libs)
+    // ==========================
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){ entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+      });
+    },{root:null,rootMargin:'0px',threshold:0.12});
+
+    document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+    // ==========================
+    // Simple contact handler (frontend only)
+    // ==========================
+    function handleContact(e){
+      e.preventDefault();
+      const form = e.target;
+      const data = {name: form.name.value, email: form.email.value, message: form.message.value};
+      // Just show a friendly toast — no backend in this demo
+      alert('Thanks, '+data.name+" — your message is noted (frontend demo).\nOpen the console to see the payload.");
+      console.log('Contact payload', data);
+      form.reset();
+    }
+
+    // ==========================
+    // Tiny performance: lazy load gallery images
+    // ==========================
+    const imgs = document.querySelectorAll('.project img');
+    imgs.forEach(img=>{ img.loading='lazy'; });
+
+    // Optional: smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', (e)=>{
+        const href = a.getAttribute('href');
+        if(href.length>1){ e.preventDefault(); document.querySelector(href).scrollIntoView({behavior:'smooth',block:'start'}); }
+      });
+    });
+  </script>
+</body>
+</html>
